@@ -11,4 +11,4 @@ def gerer_collision_x(joueur, obstacles, dx):
                 joueur.corp.? = block.?
             
             # de même pour l'autre coté
-            # ?
+            ?

@@ -4,8 +4,8 @@ def gerer_mouvement(joueur, keys):
     """
     Étape 1 : Gérer le déplacement horizontal du joueur.
     """
-    # comment capter les touches du clavier (get_pressed)
-    # ?
+    # comment capter les touches du clavier (get_pressed) ?
+    ?
     
     dx = 0
     
@@ -15,9 +15,9 @@ def gerer_mouvement(joueur, keys):
         joueur.direction = -1
         
     # pour aller à droite
-    # ?
+    ?
     
     # on actualise les coordonnées du joueur
-    # ?
+    ?
     
     return dx

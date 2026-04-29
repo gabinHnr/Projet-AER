@@ -1,7 +1,7 @@
 import pygame
 from sys import exit
 
-# Configuration de l'écran
+# Configuration de l'écran, taille en pixel
 SCREEN_WIDTH = 920
 SCREEN_HEIGHT = 500
 
