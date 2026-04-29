@@ -267,7 +267,6 @@ while True:
         if joueur.jump_cooldown > 0:
             joueur.jump_cooldown -= 1
 
-
         # expliquer on fini le moovement dcp on le dessine        
         joueur.draw(screen)
 
@@ -322,7 +321,7 @@ while True:
                 joueur.vie = joueur.vie - 1
                 if joueur.vie == 0:
                     print("tu as perdu", joueur.name)
-                    # Menu("end", joueur.name)
+                    Menu("end", joueur.name)
 
 
 
