@@ -7,11 +7,11 @@ def gerer_mouvement(joueur, keys):
     # comment capter les touches du clavier (get_pressed) ?
     ?
     
-    dx = 0
+    deplacement_x = 0
     
     # Si la touche gauche est pressée
-    if keys[joueur.key_left] and (joueur.corp.x != -joueur.corp.height /2 ):
-        dx = -joueur.x_speed
+    if keys[joueur.key_gauche] and (joueur.corp.x != -joueur.corp.height /2 ):
+        deplacement_x = -joueur.vitesse_marche
         joueur.direction = -1
         
     # pour aller à droite
@@ -20,4 +20,4 @@ def gerer_mouvement(joueur, keys):
     # on actualise les coordonnées du joueur
     ?
     
-    return dx
+    return deplacement_x

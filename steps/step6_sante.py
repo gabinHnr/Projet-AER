@@ -1,6 +1,6 @@
 import pygame
 
-def gerer_degats(bullets, joueurs):
+def gerer_degats(minition, joueurs):
     """
     Étape 6 : Gérer les collisions entre balles et joueurs.
     """

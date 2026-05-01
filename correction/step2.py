@@ -20,24 +20,24 @@ def load_img(chemin, size=None):
     return img
 
 # Nos images dans le jeu
-background_img = load_img("./Image/BG.jpg", (920, 500))
-sol_img        = load_img("./Image/ground.png", (920, 20))
-obs_img        = load_img("./Image/satone.png")
-Vie_plein_img  = load_img("./Image/Life_points.png", (30, 30))
-Vie_vide_img   = load_img("./Image/Life_point_vide.png", (30, 30))
+background_img = load_img("../Image/BG.jpg", (920, 500))
+sol_img        = load_img("../Image/ground.png", (920, 20))
+obs_img        = load_img("../Image/satone.png")
+Vie_plein_img  = load_img("../Image/Life_points.png", (30, 30))
+Vie_vide_img   = load_img("../Image/Life_point_vide.png", (30, 30))
 
 class Player:
-    def __init__(self, x, y, color, key_left, key_right, name):
+    def __init__(self, x, y, couleur, key_gauche, key_droite, nom):
         self.corp = pygame.Rect(x, y, 20, 20)
-        self.name = name
-        self.color = color
-        self.y_speed = 0  
-        self.x_speed = 5
-        self.key_left = key_left
-        self.key_right = key_right
+        self.nom = nom
+        self.couleur = couleur
+        self.vitesse_verticale = 0  
+        self.vitesse_marche = 5
+        self.key_gauche = key_gauche
+        self.key_droite = key_droite
 
     def draw(self, surface):
-        pygame.draw.rect(surface, self.color, self.corp)
+        pygame.draw.rect(surface, self.couleur, self.corp)
 
 # Nos joueurs
 joueur1 = Player(100, 460, (255, 0, 0), K_q, K_d, "Player 1")
@@ -68,11 +68,11 @@ while True:
     for joueur in joueurs:
         dx = 0 
 
-        if keys[joueur.key_left] and (joueur.corp.x != -joueur.corp.height /2 ):
-            dx = -joueur.x_speed
+        if keys[joueur.key_gauche] and (joueur.corp.x != -joueur.corp.height /2 ):
+            dx = -joueur.vitesse_marche
 
-        if keys[joueur.key_right] and (joueur.corp.x != 920 -joueur.corp.height /2 ):
-            dx = joueur.x_speed
+        if keys[joueur.key_droite] and (joueur.corp.x != 920 -joueur.corp.height /2 ):
+            dx = joueur.vitesse_marche
 
         joueur.corp.x += dx
 

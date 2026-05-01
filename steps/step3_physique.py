@@ -24,7 +24,7 @@ def gerer_physique(joueur, obstacles, keys):
 
 
 
-        # ( /!\ attention il y aura surement un probleme si vous ne réinitialisé pas y_speed /!\ ) #
+        # ( /!\ attention il y aura surement un probleme si vous ne réinitialisé pas vitesse_verticale /!\ ) #
 
 
 
@@ -36,7 +36,7 @@ def gerer_physique(joueur, obstacles, keys):
 
     if keys[?] and joueur.jump_cooldown == 0:
         joueur.jump_cooldown = 15
-        # modifier la valeur de y_speed
+        # modifier la valeur de vitesse_verticale
         ?
 
 

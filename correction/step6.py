@@ -20,25 +20,25 @@ def load_img(chemin, size=None):
     return img
 
 # Nos images dans le jeu
-background_img = load_img("./Image/BG.jpg", (920, 500))
-sol_img        = load_img("./Image/ground.png", (920, 20))
-obs_img        = load_img("./Image/satone.png")
-Vie_plein_img  = load_img("./Image/Life_points.png", (30, 30))
-Vie_vide_img   = load_img("./Image/Life_point_vide.png", (30, 30))
+background_img = load_img("../Image/BG.jpg", (920, 500))
+sol_img        = load_img("../Image/ground.png", (920, 20))
+obs_img        = load_img("../Image/satone.png")
+Vie_plein_img  = load_img("../Image/Life_points.png", (30, 30))
+Vie_vide_img   = load_img("../Image/Life_point_vide.png", (30, 30))
 
 class Player:
-    def __init__(self, x, y, color, key_left, key_right, key_jump, key_shoot, name):
+    def __init__(self, x, y, couleur, key_gauche, key_droite, key_saut, key_tirer, nom):
         self.corp = pygame.Rect(x, y, 20, 20)
-        self.name = name
-        self.color = color
-        self.y_speed = 0  
-        self.x_speed = 5
-        self.key_left = key_left
-        self.key_right = key_right
-        self.key_jump = key_jump
+        self.nom = nom
+        self.couleur = couleur
+        self.vitesse_verticale = 0  
+        self.vitesse_marche = 5
+        self.key_gauche = key_gauche
+        self.key_droite = key_droite
+        self.key_saut = key_saut
         self.jump_cooldown = 0
         self.direction = 1
-        self.key_shoot = key_shoot
+        self.key_tirer = key_tirer
         self.shoot_cooldown = 0
 
 ###################### on ajoute #####################
@@ -47,7 +47,7 @@ class Player:
 
 
     def draw(self, surface):
-        pygame.draw.rect(surface, self.color, self.corp)
+        pygame.draw.rect(surface, self.couleur, self.corp)
 
 
 
@@ -56,14 +56,14 @@ class Bullet:
         self.rect = pygame.Rect(0, 0, 10, 5)
         self.rect.center = (x, y)
         self.direction = direction
-        self.color = (255, 255, 0)  # Jaune
+        self.couleur = (255, 255, 0)  # Jaune
 
     def move(self):
         self.rect.x += 15 * self.direction
 
     def draw(self, surface):
         # On dessine le rectangle directement
-        pygame.draw.rect(surface, self.color, self.rect)
+        pygame.draw.rect(surface, self.couleur, self.rect)
 
 
 ###################### on ajoute #####################
@@ -97,7 +97,7 @@ obstacles = [
 
 
 # emplaclement des munitions
-bullets = []
+minition = []
 
 while True:
     clock.tick(30)
@@ -116,12 +116,12 @@ while True:
 
 ################################ mouvement en X #####################################
 
-        if keys[joueur.key_left] and (joueur.corp.x != -joueur.corp.height /2 ):
-            dx = -joueur.x_speed
+        if keys[joueur.key_gauche] and (joueur.corp.x != -joueur.corp.height /2 ):
+            dx = -joueur.vitesse_marche
             joueur.direction = -1
 
-        if keys[joueur.key_right] and (joueur.corp.x != 920 -joueur.corp.height /2 ):
-            dx = joueur.x_speed
+        if keys[joueur.key_droite] and (joueur.corp.x != 920 -joueur.corp.height /2 ):
+            dx = joueur.vitesse_marche
             joueur.direction = 1
 
         joueur.corp.x += dx
@@ -138,24 +138,24 @@ while True:
 ################################ mouvement en Y #####################################
 
         # on fait ca en deux
-        joueur.y_speed += 0.5 
-        joueur.corp.y += joueur.y_speed
+        joueur.vitesse_verticale += 0.5 
+        joueur.corp.y += joueur.vitesse_verticale
 
         # on fait en trois
         for block in obstacles:
             if joueur.corp.colliderect(block):
-                if joueur.y_speed > 0:
+                if joueur.vitesse_verticale > 0:
                     joueur.corp.bottom = block.top
 
-                elif joueur.y_speed < 0:
+                elif joueur.vitesse_verticale < 0:
                     joueur.corp.top = block.bottom
                 
-                joueur.y_speed = 0
+                joueur.vitesse_verticale = 0
 
         # fait ca en premier 
-        if keys[joueur.key_jump] and joueur.jump_cooldown == 0:
+        if keys[joueur.key_saut] and joueur.jump_cooldown == 0:
             joueur.jump_cooldown = 15
-            joueur.y_speed = -10
+            joueur.vitesse_verticale = -10
 
         if joueur.jump_cooldown > 0:
             joueur.jump_cooldown -= 1
@@ -164,10 +164,10 @@ while True:
 
 #################################### bullet #########################################
 
-        if keys[joueur.key_shoot] and joueur.shoot_cooldown == 0:
+        if keys[joueur.key_tirer] and joueur.shoot_cooldown == 0:
 
             new_bullet = Bullet(joueur.corp.centerx, joueur.corp.centery, joueur.direction)
-            bullets.append(new_bullet)
+            minition.append(new_bullet)
 
             joueur.shoot_cooldown = 10
         
@@ -177,13 +177,13 @@ while True:
 
 
         
-    for bullet in bullets[:]:
+    for bullet in minition[:]:
         bullet.move()
         bullet.draw(screen)
 
         for block in obstacles:
             if bullet.rect.colliderect(block):
-                bullets.remove(bullet)
+                minition.remove(bullet)
 
 #####################################################################################
 
@@ -193,11 +193,11 @@ while True:
         for joueur in joueurs:
             if bullet.rect.colliderect(joueur.corp):
                 # si touche on le degage
-                bullets.remove(bullet)
+                minition.remove(bullet)
                 # on retire  poin de vie
                 joueur.vie = joueur.vie - 1
                 if joueur.vie == 0:
-                    Menu("end", joueur.name)
+                    Menu("end", joueur.nom)
 
     # puis
     Dessiner_Vie(joueur1, 20, 20)

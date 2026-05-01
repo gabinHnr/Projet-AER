@@ -18,20 +18,20 @@ def load_img(chemin, size=None):
     return img
 
 # Nos images dans le jeu
-background_img = load_img("./Image/BG.jpg", (920, 500))
-sol_img        = load_img("./Image/ground.png", (920, 20))
-obs_img        = load_img("./Image/satone.png")
-Vie_plein_img  = load_img("./Image/Life_points.png", (30, 30))
-Vie_vide_img   = load_img("./Image/Life_point_vide.png", (30, 30))
+background_img = load_img("../Image/BG.jpg", (920, 500))
+sol_img        = load_img("../Image/ground.png", (920, 20))
+obs_img        = load_img("../Image/satone.png")
+Vie_plein_img  = load_img("../Image/Life_points.png", (30, 30))
+Vie_vide_img   = load_img("../Image/Life_point_vide.png", (30, 30))
 
 class Player:
-    def __init__(self, x, y, color, name):
+    def __init__(self, x, y, couleur, nom):
         self.corp = pygame.Rect(x, y, 20, 20)
-        self.name = name
-        self.color = color
+        self.nom = nom
+        self.couleur = couleur
 
     def draw(self, surface):
-        pygame.draw.rect(surface, self.color, self.corp)
+        pygame.draw.rect(surface, self.couleur, self.corp)
 
 # Nos joueurs
 joueur1 = Player(100, 460, (255, 0, 0), "Player 1")       
