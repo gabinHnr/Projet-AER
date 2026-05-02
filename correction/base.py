@@ -18,7 +18,7 @@ def load_img(chemin, size=None):
     return img
 
 # Nos images dans le jeu
-background_img = load_img("../Image/BG.jpg", (920, 500))
+background_img = load_img("../Image/sky.png", (920, 500))
 sol_img        = load_img("../Image/ground.png", (920, 20))
 obs_img        = load_img("../Image/satone.png")
 Vie_plein_img  = load_img("../Image/Life_points.png", (30, 30))

@@ -35,7 +35,7 @@ clock = pygame.time.Clock()
 
 #==========================#  Chargement des images  #===============================#
 
-background_img = load_img("./Image/BG.jpg", (SCREEN_WIDTH, SCREEN_HEIGHT))
+background_img = load_img("./Image/sky.png", (SCREEN_WIDTH, SCREEN_HEIGHT))
 vie_plein_img = load_img("./Image/Life_points.png", (30, 30), colorkey=(255, 255, 255))
 vie_vide_img  = load_img("./Image/Life_point_vide.png", (30, 30), colorkey=(255, 255, 255))
 
@@ -47,7 +47,7 @@ joueur1 = Player(100, 400, (255, 0, 0), {}, "Player 1")
 joueur2 = Player(800, 400, (0, 0, 255), {}, "Player 2")
 
 joueurs = [joueur1, joueur2]
-minition = []
+munitions = []
 
 #==========================# Définition des obstacles #=========================#
 
@@ -104,7 +104,7 @@ while True:
         joueur.draw(screen)
 
     # 4. Les munitions
-    for bullet in minition:
+    for bullet in munitions:
         bullet.draw(screen)
 
     # 5. L'interface (vies) - toujours au dessus de tout
