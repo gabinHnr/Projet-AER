@@ -20,11 +20,12 @@ def load_img(chemin, size=None):
     return img
 
 # Nos images dans le jeu
-background_img = load_img("../Image/BG.jpg", (920, 500))
-sol_img        = load_img("../Image/ground.png", (920, 20))
-obs_img        = load_img("../Image/satone.png")
-Vie_plein_img  = load_img("../Image/Life_points.png", (30, 30))
-Vie_vide_img   = load_img("../Image/Life_point_vide.png", (30, 30))
+background_img = load_img("./Image/sky.png", (920, 500))
+sol_img        = load_img("./Image/ground.png", (920, 20))
+plafond_img    = load_img("./Image/plafond.png", (920, 20))
+obs_img        = load_img("./Image/plateforme1.png")
+Vie_plein_img  = load_img("./Image/Life_points.png", (30, 30))
+Vie_vide_img   = load_img("./Image/Life_point_vide.png", (30, 30))
 
 class Player:
     def __init__(self, x, y, couleur, key_gauche, key_droite, nom):
@@ -56,7 +57,7 @@ joueurs = [joueur1, joueur2]
 # emplacement des obstacles
 obstacles = [
     pygame.Rect(0, 480, 920, 20),    # Le sol
-    pygame.Rect(10, 0, 920, 20),    # Le plafond
+    pygame.Rect(0, 0, 920, 20),    # Le plafond
     pygame.Rect(250, 450, 60, 20),   # Plateforme 1
     pygame.Rect(400, 400, 100, 20)   # Plateforme 2
 ]
@@ -91,7 +92,9 @@ while True:
         joueur.draw(screen)
 
     for block in obstacles:
-        if block.width == 920: 
+        if block.y == 0: 
+            screen.blit(plafond_img, block)
+        elif block.y == 480:
             screen.blit(sol_img, block)
         else:
             img_temp = pygame.transform.scale(obs_img, (block.width, block.height))
